@@ -28,6 +28,7 @@ AMyPawn::AMyPawn()
 
 	//rotate camera
 	OurCamera->SetRelativeRotation(FRotator(-45, 0, 0));
+	InitLocation = GetActorLocation();
 }
 
 void AMyPawn::MoveXAxis(float AxisValue){
@@ -53,7 +54,6 @@ void AMyPawn::StopGrowing(){
 void AMyPawn::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 // Called every frame
@@ -81,7 +81,12 @@ void AMyPawn::Tick(float DeltaTime)
 	{
 			FVector NewLocation = GetActorLocation() + (CurrentAcceleration*.5 * DeltaTime);
 			SetActorLocation(NewLocation);
-		
+			if (FMath::Abs(NewLocation.X) >= 500){
+				CurrentAcceleration.X = .8*-CurrentAcceleration.X;
+			}	
+			if (FMath::Abs(NewLocation.Y) >= 500){
+				CurrentAcceleration.Y = .8*-CurrentAcceleration.Y;
+			}
 	}
 
 

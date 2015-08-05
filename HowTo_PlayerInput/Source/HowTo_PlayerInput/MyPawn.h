@@ -39,5 +39,6 @@ public:
 
 	float xAcceleration;
 	float yAcceleration;
+	FVector InitLocation;
 	
 };
